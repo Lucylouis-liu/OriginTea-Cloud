@@ -36,6 +36,28 @@ nbdist/
 .nb-gradle/
 
 ######################################################################
+# Node.js / Frontend
+node_modules/
+ruoyi-ui/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+######################################################################
+# Compiled Files
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+######################################################################
 # Others
 *.log
 *.xml.versionsBackup
