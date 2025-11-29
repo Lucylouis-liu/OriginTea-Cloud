@@ -75,6 +75,18 @@ public class ValidateCodeServiceImpl implements ValidateCodeService
             capStr = code = captchaProducer.createText();
             image = captchaProducer.createImage(capStr);
         }
+        else
+        {
+            // 默认使用字符验证码
+            capStr = code = captchaProducer.createText();
+            image = captchaProducer.createImage(capStr);
+        }
+
+        // 检查验证码是否生成成功
+        if (image == null || code == null)
+        {
+            return AjaxResult.error("验证码生成失败");
+        }
 
         redisService.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出

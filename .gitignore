@@ -58,6 +58,12 @@ yarn-error.log*
 hs_err_pid*
 
 ######################################################################
+# Database / Docker
+*.sock
+docker_dev/mysql/data/
+docker_dev/*/data/
+
+######################################################################
 # Others
 *.log
 *.xml.versionsBackup

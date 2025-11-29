@@ -20,6 +20,7 @@ import com.ruoyi.common.redis.service.RedisService;
 import com.ruoyi.gateway.config.properties.IgnoreWhiteProperties;
 import io.jsonwebtoken.Claims;
 import reactor.core.publisher.Mono;
+import java.util.List;
 
 /**
  * 网关鉴权
@@ -47,10 +48,20 @@ public class AuthFilter implements GlobalFilter, Ordered
 
         String url = request.getURI().getPath();
         // 跳过不需要验证的路径
-        if (StringUtils.matches(url, ignoreWhite.getWhites()))
+        List<String> whites = ignoreWhite.getWhites();
+        if (whites != null && !whites.isEmpty())
         {
-            return chain.filter(exchange);
+            if (StringUtils.matches(url, whites))
+            {
+                log.info("[鉴权过滤]路径 {} 在白名单中，跳过验证", url);
+                return chain.filter(exchange);
+            }
         }
+        else
+        {
+            log.warn("[鉴权过滤]白名单配置为空或未加载，路径: {}", url);
+        }
+        log.info("[鉴权过滤]路径 {} 需要验证，白名单: {}", url, whites);
         String token = getToken(request);
         if (StringUtils.isEmpty(token))
         {

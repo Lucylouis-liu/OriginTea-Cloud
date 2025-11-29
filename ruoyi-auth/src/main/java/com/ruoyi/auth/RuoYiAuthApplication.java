@@ -3,13 +3,16 @@ package com.ruoyi.auth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Import;
 import com.ruoyi.common.security.annotation.EnableRyFeignClients;
+import com.ruoyi.common.security.config.ApplicationConfig;
 
 /**
  * 认证授权中心
  * 
  * @author ruoyi
  */
+@Import(ApplicationConfig.class)
 @EnableRyFeignClients
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class RuoYiAuthApplication

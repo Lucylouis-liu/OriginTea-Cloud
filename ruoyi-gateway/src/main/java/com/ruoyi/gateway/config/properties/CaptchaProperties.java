@@ -15,18 +15,18 @@ import org.springframework.context.annotation.Configuration;
 public class CaptchaProperties
 {
     /**
-     * 验证码开关
+     * 验证码开关（默认开启）
      */
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     /**
-     * 验证码类型（math 数组计算 char 字符）
+     * 验证码类型（math 数组计算 char 字符，默认 char）
      */
-    private String type;
+    private String type = "char";
 
     public Boolean getEnabled()
     {
-        return enabled;
+        return enabled != null ? enabled : true;
     }
 
     public void setEnabled(Boolean enabled)
@@ -36,7 +36,7 @@ public class CaptchaProperties
 
     public String getType()
     {
-        return type;
+        return type != null ? type : "char";
     }
 
     public void setType(String type)
